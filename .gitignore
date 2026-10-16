@@ -1,0 +1,9 @@
+node_modules
+.env
+.env.local
+*.log
+npm-debug.log*
+
+# Uploaded media (keep the folder, ignore contents)
+uploads/*
+!uploads/.gitkeep
