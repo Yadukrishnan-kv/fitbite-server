@@ -8,7 +8,6 @@
   "scripts": {
     "predev": "kill-port 5000",
     "dev": "node --watch src/index.js",
-    "prestart": "kill-port 5000",
     "start": "node src/index.js",
     "seed": "node src/seed/seed.js",
     "seed:fresh": "node src/seed/seed.js --fresh"
