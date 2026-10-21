@@ -4,8 +4,10 @@
  * the admin panel; this file only defines the initial state.
  */
 
+// Site Title / Default Meta Description / Default Meta Keywords were removed
+// from here by request — the homepage and menu page now carry their own
+// fixed SEO title/description/keywords directly in App.jsx / DishesPage.jsx.
 export const siteSettings = [
-  { key: 'siteTitle', value: 'Fitbite — Chef Crafted Nutrition. Delivered Daily.', type: 'text', label: 'Site Title', group: 'general', sortOrder: 1 },
   { key: 'tagline', value: 'Chef-crafted nutrition delivered daily. Fuel your performance, support your wellness, simplify your life.', type: 'textarea', label: 'Footer Tagline', group: 'general', sortOrder: 2 },
   { key: 'logo', value: '/logo.png', type: 'image', label: 'Logo', group: 'branding', sortOrder: 3 },
   { key: 'phoneDisplay', value: '+91 80898 39740', type: 'phone', label: 'Phone (display)', group: 'contact', sortOrder: 4 },
@@ -13,8 +15,6 @@ export const siteSettings = [
   { key: 'email', value: 'hello@fitbite.in', type: 'email', label: 'Email', group: 'contact', sortOrder: 6 },
   { key: 'locationFull', value: 'Kozhikode, Kerala, India', type: 'text', label: 'Location (full)', group: 'contact', sortOrder: 7 },
   { key: 'locationShort', value: 'Kozhikode, Kerala', type: 'text', label: 'Location (short)', group: 'contact', sortOrder: 8 },
-  { key: 'metaDescription', value: 'Fitbite delivers chef-crafted, nutritionist-approved healthy meals daily in Kozhikode, Kerala. High-protein power bowls and salads to fuel your performance.', type: 'textarea', label: 'Default Meta Description', group: 'seo', sortOrder: 9 },
-  { key: 'metaKeywords', value: 'healthy meals, meal delivery, high protein, Kozhikode, Kerala, salads, power bowls, fitness food', type: 'text', label: 'Default Meta Keywords', group: 'seo', sortOrder: 10 },
 ];
 
 export const socialLinks = [
@@ -258,31 +258,8 @@ export const faqs = [
   { question: 'Do you provide nutrition information?', answer: "Every meal comes with complete nutritional information including calories, protein, carbohydrates, fats, and fiber content. We're fully transparent about what goes into every bowl we serve.", sortOrder: 6 },
 ];
 
-// System pages that map to existing routes. Body content is minimal because
-// these routes are composed of section blocks, but the SEO fields are managed here.
-export const pages = [
-  {
-    title: 'Home',
-    slug: 'home',
-    heading: 'Chef Crafted Nutrition. Delivered Daily.',
-    bodyHtml: '',
-    seoTitle: 'Fitbite — Chef Crafted Nutrition. Delivered Daily.',
-    metaDescription: 'Fitbite delivers chef-crafted, nutritionist-approved healthy meals daily in Kozhikode, Kerala. High-protein power bowls and salads to fuel your performance.',
-    metaKeywords: 'healthy meals, meal delivery, high protein, Kozhikode, Kerala',
-    status: 'published',
-    isSystem: true,
-    sortOrder: 1,
-  },
-  {
-    title: 'Our Menu',
-    slug: 'dishes',
-    heading: 'Chef-Crafted Power Bowls',
-    bodyHtml: '',
-    seoTitle: 'Our Menu — Fitbite Power Bowls & Salads',
-    metaDescription: 'Explore Fitbite’s full menu of chef-crafted power bowls and salads. High-protein, veg, and weight-loss options delivered fresh daily.',
-    metaKeywords: 'fitbite menu, power bowls, salads, high protein meals',
-    status: 'published',
-    isSystem: true,
-    sortOrder: 2,
-  },
-];
+// Custom CMS pages (e.g. a future /privacy-policy or /terms). `/` and
+// `/dishes` are hard-routed in App.jsx straight to HomePage/DishesPage, which
+// read from Settings/Sections/Dishes instead — so there's nothing to seed
+// here for them; see RESERVED_SLUGS in contentValidators.js.
+export const pages = [];

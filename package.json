@@ -6,7 +6,9 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
+    "predev": "kill-port 5000",
     "dev": "node --watch src/index.js",
+    "prestart": "kill-port 5000",
     "start": "node src/index.js",
     "seed": "node src/seed/seed.js",
     "seed:fresh": "node src/seed/seed.js --fresh"
@@ -29,5 +31,8 @@
   },
   "engines": {
     "node": ">=18.18.0"
+  },
+  "devDependencies": {
+    "kill-port": "^2.0.1"
   }
 }

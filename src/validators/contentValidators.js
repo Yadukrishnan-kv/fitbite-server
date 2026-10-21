@@ -8,6 +8,11 @@ export const reorderSchema = z.object({
 });
 
 /* ---------------- Pages ---------------- */
+// 'home' and 'dishes' are hard-routed in the public app (HomePage/DishesPage
+// render directly from Settings/Sections/Dishes) and never reach the CMS page
+// renderer, so a custom page saved under either slug would silently never show.
+const RESERVED_SLUGS = ['home', 'dishes'];
+
 export const pageCreateSchema = z.object({
   title: str(200).min(1, 'Title is required'),
   slug: z
@@ -16,6 +21,7 @@ export const pageCreateSchema = z.object({
     .toLowerCase()
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug may contain lowercase letters, numbers and hyphens only')
     .max(200)
+    .refine((s) => !RESERVED_SLUGS.includes(s), 'This slug is reserved by the live site and cannot be used')
     .optional(),
   heading: optionalStr(300),
   bodyHtml: z.string().max(200000).optional().default(''),
@@ -70,7 +76,6 @@ export const faqUpdateSchema = faqCreateSchema.partial();
 
 /* ---------------- Sections ---------------- */
 export const sectionUpdateSchema = z.object({
-  name: optionalStr(120),
   tag: optionalStr(120),
   title: optionalStr(300),
   subtitle: optionalStr(1000),
