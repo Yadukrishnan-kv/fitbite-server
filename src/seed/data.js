@@ -257,9 +257,3 @@ export const faqs = [
   { question: 'Can I cancel anytime?', answer: 'Yes, you can pause or cancel your subscription at any time with no questions asked. We believe in complete flexibility. Just contact us 24 hours before your next delivery to make any changes.', sortOrder: 5 },
   { question: 'Do you provide nutrition information?', answer: "Every meal comes with complete nutritional information including calories, protein, carbohydrates, fats, and fiber content. We're fully transparent about what goes into every bowl we serve.", sortOrder: 6 },
 ];
-
-// Custom CMS pages (e.g. a future /privacy-policy or /terms). `/` and
-// `/dishes` are hard-routed in App.jsx straight to HomePage/DishesPage, which
-// read from Settings/Sections/Dishes instead — so there's nothing to seed
-// here for them; see RESERVED_SLUGS in contentValidators.js.
-export const pages = [];

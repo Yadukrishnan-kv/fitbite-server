@@ -1,5 +1,4 @@
 export { AdminUser } from './AdminUser.js';
-export { Page } from './Page.js';
 export { Menu } from './Menu.js';
 export { MenuItem } from './MenuItem.js';
 export { Media } from './Media.js';

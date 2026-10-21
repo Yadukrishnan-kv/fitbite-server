@@ -4,7 +4,6 @@ import { validate } from '../middleware/validate.js';
 import { uploadImageMiddleware } from '../middleware/upload.js';
 
 import * as overview from '../controllers/admin/overviewController.js';
-import * as pages from '../controllers/admin/pageController.js';
 import * as sections from '../controllers/admin/sectionController.js';
 import * as settings from '../controllers/admin/settingsController.js';
 import * as menus from '../controllers/admin/menuController.js';
@@ -19,8 +18,6 @@ import {
 
 import {
   reorderSchema,
-  pageCreateSchema,
-  pageUpdateSchema,
   dishCreateSchema,
   dishUpdateSchema,
   testimonialCreateSchema,
@@ -56,16 +53,6 @@ function mountCrud(base, controller, { createSchema, updateSchema }) {
 
 /* ---- Dashboard ---- */
 router.get('/overview', overview.overview);
-
-/* ---- Pages (custom controller: slug, publish, system guard) ---- */
-router.get('/pages', pages.list);
-router.get('/pages/:id', pages.getOne);
-router.post('/pages', validate({ body: pageCreateSchema }), pages.create);
-router.post('/pages/reorder', validate({ body: reorderSchema }), pages.reorder);
-router.post('/pages/:id/publish', pages.setStatus('published'));
-router.post('/pages/:id/unpublish', pages.setStatus('draft'));
-router.patch('/pages/:id', validate({ body: pageUpdateSchema }), pages.update);
-router.delete('/pages/:id', pages.remove);
 
 /* ---- Simple CRUD resources ---- */
 mountCrud('/dishes', dishController, { createSchema: dishCreateSchema, updateSchema: dishUpdateSchema });
@@ -112,8 +99,5 @@ router.get('/submissions', submissions.list);
 router.get('/submissions/:id', submissions.getOne);
 router.patch('/submissions/:id', validate({ body: submissionUpdateSchema }), submissions.updateStatus);
 router.delete('/submissions/:id', submissions.remove);
-
-// Convert duplicate-slug DB errors on page routes into clean 409s.
-router.use(pages.handleDuplicateSlug);
 
 export default router;

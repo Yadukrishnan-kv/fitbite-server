@@ -19,7 +19,6 @@ router.get('/bootstrap', publicController.bootstrap);
 router.get('/settings', publicController.getSettings);
 router.get('/menus/:location', publicController.getMenu);
 router.get('/sections', publicController.getSections);
-router.get('/pages/:slug', publicController.getPageBySlug);
 router.get('/dishes', publicController.getDishes);
 router.get('/testimonials', publicController.getTestimonials);
 router.get('/faqs', publicController.getFaqs);

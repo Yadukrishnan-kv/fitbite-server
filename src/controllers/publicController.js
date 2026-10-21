@@ -1,5 +1,4 @@
 import {
-  Page,
   Menu,
   MenuItem,
   SiteSetting,
@@ -11,7 +10,6 @@ import {
   FormSubmission,
 } from '../models/index.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
-import { notFound } from '../utils/httpError.js';
 
 /** Build a nested tree from a flat list of enabled menu items. */
 function buildMenuTree(items) {
@@ -85,12 +83,6 @@ export const getSections = asyncHandler(async (_req, res) => {
     return acc;
   }, {});
   res.json({ sections: sections.map((s) => s.toJSON()), byKey: map });
-});
-
-export const getPageBySlug = asyncHandler(async (req, res) => {
-  const page = await Page.findOne({ slug: req.params.slug, status: 'published', deletedAt: null });
-  if (!page) throw notFound('Page not found');
-  res.json({ item: page });
 });
 
 const DISH_TYPES = ['salad', 'lunch', 'wrap'];

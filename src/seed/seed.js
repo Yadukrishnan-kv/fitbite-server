@@ -12,7 +12,6 @@ import { env } from '../config/env.js';
 import { connectDB, disconnectDB } from '../config/db.js';
 import {
   AdminUser,
-  Page,
   Menu,
   MenuItem,
   SiteSetting,
@@ -74,13 +73,6 @@ async function seedSections() {
     await Section.updateOne({ key: s.key }, { $set: s }, { upsert: true });
   }
   log(`sections: ${data.sections.length} upserted`);
-}
-
-async function seedPages() {
-  for (const p of data.pages) {
-    await Page.updateOne({ slug: p.slug }, { $set: p }, { upsert: true });
-  }
-  log(`pages: ${data.pages.length} upserted`);
 }
 
 async function seedDishes() {
@@ -151,7 +143,6 @@ async function seedMenus() {
 async function wipeContent() {
   log('--fresh: wiping content collections (admins are preserved)...');
   await Promise.all([
-    Page.deleteMany({}),
     Menu.deleteMany({}),
     MenuItem.deleteMany({}),
     SiteSetting.deleteMany({}),
@@ -171,7 +162,6 @@ async function main() {
   await seedSettings();
   await seedSocial();
   await seedSections();
-  await seedPages();
   await seedDishes();
   await seedTestimonials();
   await seedFaqs();

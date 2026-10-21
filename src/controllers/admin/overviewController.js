@@ -1,5 +1,4 @@
 import {
-  Page,
   Dish,
   Testimonial,
   Faq,
@@ -12,8 +11,6 @@ import { asyncHandler } from '../../utils/asyncHandler.js';
 /** GET /api/admin/overview — headline counts for the dashboard. */
 export const overview = asyncHandler(async (_req, res) => {
   const [
-    pagesTotal,
-    pagesPublished,
     salads,
     lunch,
     wraps,
@@ -25,8 +22,6 @@ export const overview = asyncHandler(async (_req, res) => {
     submissionsNew,
     recentSubmissions,
   ] = await Promise.all([
-    Page.countDocuments({ deletedAt: null }),
-    Page.countDocuments({ deletedAt: null, status: 'published' }),
     Dish.countDocuments({ deletedAt: null, type: 'salad' }),
     Dish.countDocuments({ deletedAt: null, type: 'lunch' }),
     Dish.countDocuments({ deletedAt: null, type: 'wrap' }),
@@ -41,7 +36,6 @@ export const overview = asyncHandler(async (_req, res) => {
 
   res.json({
     counts: {
-      pages: { total: pagesTotal, published: pagesPublished },
       salads,
       lunch,
       wraps,

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import mongoose from 'mongoose';
-import { Media, Page, Dish, SiteSetting } from '../../models/index.js';
+import { Media, Dish, SiteSetting } from '../../models/index.js';
 import { asyncHandler } from '../../utils/asyncHandler.js';
 import { notFound, badRequest, conflict } from '../../utils/httpError.js';
 import { uploadsDir, hasValidImageSignature } from '../../middleware/upload.js';
@@ -63,12 +63,11 @@ export const update = asyncHandler(async (req, res) => {
 
 /** Find places the media URL is referenced, to warn before deletion. */
 async function findUsage(url) {
-  const [pages, dishes, settings] = await Promise.all([
-    Page.countDocuments({ featuredImage: url, deletedAt: null }),
+  const [dishes, settings] = await Promise.all([
     Dish.countDocuments({ image: url, deletedAt: null }),
     SiteSetting.countDocuments({ value: url }),
   ]);
-  return pages + dishes + settings;
+  return dishes + settings;
 }
 
 /**
